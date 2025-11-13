@@ -7,6 +7,19 @@ def input1():
     print("ik ben in functie input1")
     input_entry1.delete(1, tk.END)  # Remove current text in entry
 
+window_width = 500
+window_height = 200
+
+screen_width = master.winfo_screenwidth()
+screen_height = master.winfo_screenheight()
+
+center_x = int(screen_width/2 - window_width/2)
+center_y = int(screen_height/2 - window_height/2)
+
+master.geometry(f'{window_width}x{window_height}+{center_x}+{center_y}')
+
+master.iconbitmap('./Logo/bike.ico')
+
 top_frame = tk.Frame(master)
 bottom_frame = tk.Frame(master)
 line = tk.Frame(master, height=1, width=400, bg="grey80", relief="groove")
