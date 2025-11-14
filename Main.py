@@ -61,12 +61,12 @@ label_aantal.grid(row=1, column=0, padx=10, pady=10, sticky="w")
 entry_aantal = tk.Entry(tab_verhuur, width=30)
 entry_aantal.grid(row=1, column=1, padx=10, pady=10)
 
-label_type = tk.Label(tab_verhuur, text="Type fiets:")
-label_type.grid(row=2, column=0, padx=10, pady=10, sticky="w")
+label_type = ttk.Label(tab_verhuur, text='Selecteer fiets soort:').grid(row=2, column=0, padx=10, pady=10, sticky="w")
 
-fiets_type = tk.StringVar(value="Standaard")
-ttk.Radiobutton(tab_verhuur, text="Standaard", variable=fiets_type, value="Standaard").grid(row=2, column=1, sticky="w")
-ttk.Radiobutton(tab_verhuur, text="Elektrisch", variable=fiets_type, value="Elektrisch").grid(row=2, column=2, sticky="w")
+fiets_type = tk.StringVar()
+fiets_soort = ttk.Combobox(tab_verhuur, width = 27, textvariable=fiets_type)
+fiets_soort['values'] = ('Vrouwen standaard', 'Vrouwen elektrisch', 'mannen  standaard', 'mannen elektrisch')
+fiets_soort.grid(row=2, column=1, padx=10, pady=10)
 
 btn_huur = tk.Button(tab_verhuur, text="Bevestig huur", command=huur_fiets, bg="#4CAF50", fg="white")
 btn_huur.grid(row=3, column=1, pady=15)
