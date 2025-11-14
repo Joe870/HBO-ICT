@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  # MySQL Database Service
+  db:
+    image: mysql:8.0
+    container_name: mysql_db_container
+    restart: always
+    environment:
+      # These variables set up the database, user, and passwords
+      MYSQL_ROOT_PASSWORD: password 
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      # Map container port 3306 to host port 3306 (optional, for external access like MySQL Workbench)
+      - "3307:3306"
+    healthcheck: # Ensures the app waits for the DB to be ready
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "user", "-p${MYSQL_PASSWORD}"]
+      timeout: 20s
+      retries: 10
+
+  # Python Application Service
+  app:
+    build: . # Build using the Dockerfile in the current directory
+    container_name: python_app_container
+    # Wait for the 'db' service to be up and healthy before starting
+    depends_on:
+      db:
+        condition: service_healthy
+    # The Python script uses 'db' as the host, which is the service name

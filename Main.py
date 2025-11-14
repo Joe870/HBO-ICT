@@ -1,24 +1,51 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
+import mysql.connector
 
 # --------------------------
-# BASISVENSTER
+# databse gegevens
 # --------------------------
-root = tk.Tk()
-root.title("Biker Verhuur Applicatie")
+# db_config = {
+#     'user': 'user',
+#     'password' : 'password',
+#     'host' : 'db',
+#     'database' : 'mydatabase',
+#     'port' : 3306
+# }
+
+# try: 
+#     cnx = mysql.connector.connect(db_config)
+
+#     cursor = cnx.cursor()
+#     cursor.execute("SELECT 1")
+#     result = cursor.fetchone()
+#     print(f"Connection succesful! Query result: {result}")
+
+#     cursor.close()
+#     cnx.close()
+# except mysql.connector.Error as err:
+#     print(f"Error connecting to MySQLL {err}")
+
+# if __name__ == "__main__":
+#     pass
+   # --------------------------
+   # BASISVENSTER
+   # --------------------------
+master = tk.Tk()
+master.title("Biker Verhuur Applicatie")
 
 window_width = 700
 window_height = 500
-screen_width = root.winfo_screenwidth()
-screen_height = root.winfo_screenheight()
+screen_width = master.winfo_screenwidth()
+screen_height = master.winfo_screenheight()
 center_x = int(screen_width/2 - window_width/2)
 center_y = int(screen_height/2 - window_height/2)
-root.geometry(f"{window_width}x{window_height}+{center_x}+{center_y}")
+master.geometry(f"{window_width}x{window_height}+{center_x}+{center_y}")
 
 # --------------------------
 # NOTEBOOK (TABS)
 # --------------------------
-tabControl = ttk.Notebook(root)
+tabControl = ttk.Notebook(master)
 tab_verhuur = ttk.Frame(tabControl)
 tab_accesoires = ttk.Frame(tabControl)
 tab_reizen = ttk.Frame(tabControl)
@@ -38,20 +65,20 @@ tabControl.pack(expand=1, fill="both")
 verhuur_data = []  # hier “slaan we op” wat de gebruiker invoert
 
 def huur_fiets():
-    naam = entry_naam.get()
-    aantal = entry_aantal.get()
-    soort = fiets_type.get()
+   naam = entry_naam.get()
+   aantal = entry_aantal.get()
+   soort = fiets_type.get()
 
-    if not naam or not aantal:
-        messagebox.showwarning("Fout", "Vul alle velden in!")
-        return
-    
-    record = {"naam": naam, "aantal": aantal, "soort": soort}
-    verhuur_data.append(record)
+   if not naam or not aantal:
+      messagebox.showwarning("Fout", "Vul alle velden in!")
+      return
+         
+   record = {"naam": naam, "aantal": aantal, "soort": soort}
+   verhuur_data.append(record)
 
-    messagebox.showinfo("Succes", f"{naam} heeft {aantal} {soort}-fiets(en) gehuurd.")
-    entry_naam.delete(0, tk.END)
-    entry_aantal.delete(0, tk.END)
+   messagebox.showinfo("Succes", f"{naam} heeft {aantal} {soort}-fiets(en) gehuurd.")
+   entry_naam.delete(0, tk.END)
+   entry_aantal.delete(0, tk.END)
 
 label_naam = tk.Label(tab_verhuur, text="Naam klant:")
 label_naam.grid(row=0, column=0, padx=10, pady=10, sticky="w")
@@ -76,7 +103,11 @@ btn_huur.grid(row=3, column=1, pady=15)
 # --------------------------
 # tab 2 accesoires huren
 # --------------------------
-label_uitleg_accesoires = tk.Label(tab_verhuur, text="Naam klant:")
+# def huur_accesoires():
+#    naam = entry_naam.get()
+
+# label_uitleg_accesoires = tk.Label(tab_verhuur, text="Naam klant:")
+
 # --------------------------
 # TAB 3 – Reizen boeken
 # --------------------------
@@ -120,4 +151,4 @@ faq_label.pack(padx=20, pady=20, anchor="w")
 # --------------------------
 # START
 # --------------------------
-root.mainloop()
+master.mainloop()
