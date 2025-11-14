@@ -20,11 +20,13 @@ root.geometry(f"{window_width}x{window_height}+{center_x}+{center_y}")
 # --------------------------
 tabControl = ttk.Notebook(root)
 tab_verhuur = ttk.Frame(tabControl)
+tab_accesoires = ttk.Frame(tabControl)
 tab_reizen = ttk.Frame(tabControl)
 tab_service = ttk.Frame(tabControl)
 tab_faq = ttk.Frame(tabControl)
 
 tabControl.add(tab_verhuur, text="Fietsen huren")
+tabControl.add(tab_accesoires, text="accesoires huren")
 tabControl.add(tab_reizen, text="Reizen")
 tabControl.add(tab_service, text="Service")
 tabControl.add(tab_faq, text="FAQ")
@@ -72,7 +74,11 @@ btn_huur = tk.Button(tab_verhuur, text="Bevestig huur", command=huur_fiets, bg="
 btn_huur.grid(row=3, column=1, pady=15)
 
 # --------------------------
-# TAB 2 – Reizen boeken
+# tab 2 accesoires huren
+# --------------------------
+label_uitleg_accesoires = tk.Label(tab_verhuur, text="Naam klant:")
+# --------------------------
+# TAB 3 – Reizen boeken
 # --------------------------
 label_reis = tk.Label(tab_reizen, text="Kies type reis:")
 label_reis.pack(pady=10)
@@ -85,7 +91,7 @@ btn_reis = tk.Button(tab_reizen, text="Boek reis", command=lambda: messagebox.sh
 btn_reis.pack(pady=20)
 
 # --------------------------
-# TAB 3 – Service aanvragen
+# TAB 4 – Service aanvragen
 # --------------------------
 label_service = tk.Label(tab_service, text="Service bij pech of slecht weer")
 label_service.pack(pady=10)
@@ -94,7 +100,7 @@ btn_service = tk.Button(tab_service, text="Service aanvragen", command=lambda: m
 btn_service.pack(pady=10)
 
 # --------------------------
-# TAB 4 – FAQ
+# TAB 5 – FAQ
 # --------------------------
 faq_text = """Veelgestelde vragen:
 
