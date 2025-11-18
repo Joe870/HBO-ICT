@@ -5,29 +5,29 @@ import mysql.connector
 # --------------------------
 # databse gegevens
 # --------------------------
-# db_config = {
-#     'user': 'user',
-#     'password' : 'password',
-#     'host' : 'db',
-#     'database' : 'mydatabase',
-#     'port' : 3306
-# }
+db_config = {
+    'user': 'user',
+    'password' : 'password',
+    'host' : 'db',
+    'database' : 'mydatabase',
+    'port' : 3306
+}
 
-# try: 
-#     cnx = mysql.connector.connect(db_config)
+try: 
+    cnx = mysql.connector.connect(db_config)
 
-#     cursor = cnx.cursor()
-#     cursor.execute("SELECT 1")
-#     result = cursor.fetchone()
-#     print(f"Connection succesful! Query result: {result}")
+    cursor = cnx.cursor()
+    cursor.execute("SELECT 1")
+    result = cursor.fetchone()
+    print(f"Connection succesful! Query result: {result}")
 
-#     cursor.close()
-#     cnx.close()
-# except mysql.connector.Error as err:
-#     print(f"Error connecting to MySQLL {err}")
+    cursor.close()
+    cnx.close()
+except mysql.connector.Error as err:
+    print(f"Error connecting to MySQLL {err}")
 
-# if __name__ == "__main__":
-#     pass
+if __name__ == "__main__":
+    pass
    # --------------------------
    # BASISVENSTER
    # --------------------------
