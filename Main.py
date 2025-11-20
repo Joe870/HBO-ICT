@@ -5,29 +5,29 @@ import mysql.connector
 # --------------------------
 # databse gegevens
 # --------------------------
-db_config = {
-    'user': 'user',
-    'password' : 'password',
-    'host' : 'db',
-    'database' : 'mydatabase',
-    'port' : 3306
-}
+# db_config = {
+#     'user': 'user',
+#     'password' : 'password',
+#     'host' : 'db',
+#     'database' : 'mydatabase',
+#     'port' : 3306
+# }
 
-try: 
-    cnx = mysql.connector.connect(db_config)
+# try: 
+#     cnx = mysql.connector.connect(db_config)
 
-    cursor = cnx.cursor()
-    cursor.execute("SELECT 1")
-    result = cursor.fetchone()
-    print(f"Connection succesful! Query result: {result}")
+#     cursor = cnx.cursor()
+#     cursor.execute("SELECT 1")
+#     result = cursor.fetchone()
+#     print(f"Connection succesful! Query result: {result}")
 
-    cursor.close()
-    cnx.close()
-except mysql.connector.Error as err:
-    print(f"Error connecting to MySQLL {err}")
+#     cursor.close()
+#     cnx.close()
+# except mysql.connector.Error as err:
+#     print(f"Error connecting to MySQLL {err}")
 
-if __name__ == "__main__":
-    pass
+# if __name__ == "__main__":
+#     pass
    # --------------------------
    # BASISVENSTER
    # --------------------------
@@ -51,13 +51,16 @@ tab_accesoires = ttk.Frame(tabControl)
 tab_reizen = ttk.Frame(tabControl)
 tab_service = ttk.Frame(tabControl)
 tab_faq = ttk.Frame(tabControl)
+tab_contact = ttk.Frame(tabControl)
 
 tabControl.add(tab_verhuur, text="Fietsen huren")
 tabControl.add(tab_accesoires, text="accesoires huren")
 tabControl.add(tab_reizen, text="Reizen")
 tabControl.add(tab_service, text="Service")
 tabControl.add(tab_faq, text="FAQ")
+tabControl.add(tab_contact, text="Contact")
 tabControl.pack(expand=1, fill="both")
+
 
 # --------------------------
 # TAB 1 – Fietsen huren
@@ -65,8 +68,8 @@ tabControl.pack(expand=1, fill="both")
 verhuur_data = []  # hier “slaan we op” wat de gebruiker invoert
 
 def huur_fiets():
-   naam = entry_naam.get()
-   aantal = entry_aantal.get()
+   naam = entry_fiets_naam.get()
+   aantal = entry_fiets_aantal.get()
    soort = fiets_type.get()
 
    if not naam or not aantal:
@@ -77,36 +80,54 @@ def huur_fiets():
    verhuur_data.append(record)
 
    messagebox.showinfo("Succes", f"{naam} heeft {aantal} {soort}-fiets(en) gehuurd.")
-   entry_naam.delete(0, tk.END)
-   entry_aantal.delete(0, tk.END)
+   entry_fiets_naam.delete(0, tk.END)
+   entry_fiets_aantal.delete(0, tk.END)
 
-label_naam = tk.Label(tab_verhuur, text="Naam klant:")
-label_naam.grid(row=0, column=0, padx=10, pady=10, sticky="w")
-entry_naam = tk.Entry(tab_verhuur, width=30)
-entry_naam.grid(row=0, column=1, padx=10, pady=10)
+label_fiets_naam = tk.Label(tab_verhuur, text="Naam klant:")
+label_fiets_naam.grid(row=0, column=0, padx=10, pady=10, sticky="w")
+entry_fiets_naam = tk.Entry(tab_verhuur, width=30)
+entry_fiets_naam.grid(row=0, column=1, padx=10, pady=10)
 
-label_aantal = tk.Label(tab_verhuur, text="Aantal fietsen:")
-label_aantal.grid(row=1, column=0, padx=10, pady=10, sticky="w")
-entry_aantal = tk.Entry(tab_verhuur, width=30)
-entry_aantal.grid(row=1, column=1, padx=10, pady=10)
+label_fiets_aantal = tk.Label(tab_verhuur, text="Aantal fietsen:")
+label_fiets_aantal.grid(row=1, column=0, padx=10, pady=10, sticky="w")
+entry_fiets_aantal = tk.Entry(tab_verhuur, width=30)
+entry_fiets_aantal.grid(row=1, column=1, padx=10, pady=10)
 
-label_type = ttk.Label(tab_verhuur, text='Selecteer fiets soort:').grid(row=2, column=0, padx=10, pady=10, sticky="w")
+label_fiets_type = ttk.Label(tab_verhuur, text='Selecteer fiets soort:').grid(row=2, column=0, padx=10, pady=10, sticky="w")
 
 fiets_type = tk.StringVar()
 fiets_soort = ttk.Combobox(tab_verhuur, width = 27, textvariable=fiets_type)
 fiets_soort['values'] = ('Vrouwen standaard', 'Vrouwen elektrisch', 'mannen  standaard', 'mannen elektrisch')
 fiets_soort.grid(row=2, column=1, padx=10, pady=10)
 
-btn_huur = tk.Button(tab_verhuur, text="Bevestig huur", command=huur_fiets, bg="#4CAF50", fg="white")
-btn_huur.grid(row=3, column=1, pady=15)
+btn_huur_fiets = tk.Button(tab_verhuur, text="Bevestig huur", command=huur_fiets, bg="#4CAF50", fg="white")
+btn_huur_fiets.grid(row=3, column=1, pady=15)
 
 # --------------------------
 # tab 2 accesoires huren
 # --------------------------
 # def huur_accesoires():
 #    naam = entry_naam.get()
+label_accessoires_naam = tk.Label(tab_accesoires, text="Klantnummer:")
+label_accessoires_naam.grid(row=0, column=0, padx=10, pady=10, sticky="w")
+entry_accesoires_naam = tk.Entry(tab_accesoires, width=30)
+entry_accesoires_naam.grid(row=0, column=1, padx=10, pady=10)
 
-# label_uitleg_accesoires = tk.Label(tab_verhuur, text="Naam klant:")
+label_accessoires_aantal = tk.Label(tab_accesoires, text="Aantal accessoires:")
+label_accessoires_aantal.grid(row=1, column=0, padx=10, pady=10, sticky="w")
+entry_accessoires_aantal = tk.Entry(tab_accesoires, width=30)
+entry_accessoires_aantal.grid(row=1, column=1, padx=10, pady=10)
+
+label_accesoires_type = ttk.Label(tab_accesoires, text='Selecteer accesoire soort:').grid(row=2, column=0, padx=10, pady=10, sticky="w")
+
+accessoires_type = tk.StringVar()
+accessoires_soort = ttk.Combobox(tab_accesoires, width = 27, textvariable=accessoires_type)
+accessoires_soort['values'] = ('Fietstas', 'Fietshelm', 'Kinderzitje')
+accessoires_soort.grid(row=2, column=1, padx=10, pady=10)
+
+btn_accessoires_huur = tk.Button(tab_accesoires, text="Bevestig huur", bg="#4CAF50", fg="white")
+btn_accessoires_huur.grid(row=3, column=1, pady=15)
+
 
 # --------------------------
 # TAB 3 – Reizen boeken
@@ -148,6 +169,17 @@ faq_text = """Veelgestelde vragen:
 faq_label = tk.Label(tab_faq, text=faq_text, justify="left")
 faq_label.pack(padx=20, pady=20, anchor="w")
 
+# --------------------------
+# TAB 5 – Contact
+# --------------------------
+contact_text = """Veelgestelde vragen:
+
+telefoonnummer : 123456787
+E-mailadres : example@outlook.com
+"""
+
+contact_label = tk.Label(tab_contact, text=contact_text, justify="left")
+contact_label.pack(padx=20, pady=20, anchor="w")
 # --------------------------
 # START
 # --------------------------
