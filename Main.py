@@ -28,9 +28,9 @@ import mysql.connector
 
 # if __name__ == "__main__":
 #     pass
-   # --------------------------
-   # BASISVENSTER
-   # --------------------------
+# --------------------------
+# BASISVENSTER
+# --------------------------
 master = tk.Tk()
 master.title("Biker Verhuur Applicatie")
 
