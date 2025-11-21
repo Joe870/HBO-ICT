@@ -106,12 +106,27 @@ btn_huur_fiets.grid(row=3, column=1, pady=15)
 # --------------------------
 # tab 2 accesoires huren
 # --------------------------
-# def huur_accesoires():
-#    naam = entry_naam.get()
-label_accessoires_naam = tk.Label(tab_accesoires, text="Klantnummer:")
+def huur_accesoires():
+   naam = entry_accessoires_naam.get()
+   aantal = entry_accessoires_aantal.get()
+   soort = accessoires_soort.get()
+
+   if not naam or not aantal:
+      messagebox.showwarning("Fout", "Vul alle velden in!")
+      return
+   
+   if naam in verhuur_data:
+      record = {"naam": naam, "aantal": aantal, "soort": soort}
+      verhuur_data.append(record)
+
+      messagebox.showinfo("Succes", f"{naam} heeft {aantal} {soort}-accessoires gehuurd.")
+      entry_fiets_naam.delete(0, tk.END)
+      entry_fiets_aantal.delete(0, tk.END)
+
+label_accessoires_naam = tk.Label(tab_accesoires, text="Klant naam:")
 label_accessoires_naam.grid(row=0, column=0, padx=10, pady=10, sticky="w")
-entry_accesoires_naam = tk.Entry(tab_accesoires, width=30)
-entry_accesoires_naam.grid(row=0, column=1, padx=10, pady=10)
+entry_accessoires_naam = tk.Entry(tab_accesoires, width=30)
+entry_accessoires_naam.grid(row=0, column=1, padx=10, pady=10)
 
 label_accessoires_aantal = tk.Label(tab_accesoires, text="Aantal accessoires:")
 label_accessoires_aantal.grid(row=1, column=0, padx=10, pady=10, sticky="w")
@@ -184,3 +199,4 @@ contact_label.pack(padx=20, pady=20, anchor="w")
 # START
 # --------------------------
 master.mainloop()
+print(verhuur_data)
